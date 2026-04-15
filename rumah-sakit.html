@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RS Medika Prima — Layanan Kesehatan Terpadu</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0B1C3D;
+    --navy-mid: #152a52;
+    --teal: #1B9AAA;
+    --teal-light: #31b5c6;
+    --gold: #C9A84C;
+    --cream: #F5F0E8;
+    --white: #FFFFFF;
+    --gray-100: #F8F9FA;
+    --gray-200: #E9ECEF;
+    --gray-500: #6C757D;
+    --red: #E74C3C;
+    --green: #27AE60;
+    --shadow: 0 4px 24px rgba(11,28,61,0.10);
+    --shadow-lg: 0 12px 48px rgba(11,28,61,0.18);
+    --radius: 14px;
+    --radius-sm: 8px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--navy);
+    line-height: 1.6;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: rgba(11,28,61,0.97);
+    backdrop-filter: blur(12px);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 40px;
+    height: 68px;
+    border-bottom: 1.5px solid rgba(201,168,76,0.25);
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: 12px;
+    text-decoration: none;
+  }
+  .nav-logo .logo-icon {
+    width: 40px; height: 40px;
+    background: var(--teal);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+  }
+  .nav-logo span {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    color: var(--white);
+    font-weight: 700;
+    letter-spacing: 0.3px;
+  }
+  .nav-logo small {
+    display: block;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    color: var(--gold);
+    font-weight: 400;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+  .nav-links {
+    display: flex; gap: 6px; list-style: none;
+  }
+  .nav-links a {
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    font-size: 13.5px;
+    font-weight: 500;
+    padding: 7px 16px;
+    border-radius: var(--radius-sm);
+    transition: all 0.2s;
+    letter-spacing: 0.2px;
+  }
+  .nav-links a:hover, .nav-links a.active {
+    color: var(--white);
+    background: rgba(27,154,170,0.22);
+  }
+  .nav-cta {
+    background: var(--gold) !important;
+    color: var(--navy) !important;
+    font-weight: 600 !important;
+  }
+  .nav-cta:hover { background: #e0bc5e !important; }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 60%, #1a3a6e 100%);
+    display: flex; align-items: center;
+    padding: 100px 40px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+  #hero::before {
+    content: '';
+    position: absolute;
+    top: -120px; right: -120px;
+    width: 520px; height: 520px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(27,154,170,0.18) 0%, transparent 70%);
+  }
+  #hero::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: -80px;
+    width: 360px; height: 360px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,168,76,0.12) 0%, transparent 70%);
+  }
+  .hero-content {
+    max-width: 1100px; margin: 0 auto; width: 100%;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+    position: relative; z-index: 1;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(27,154,170,0.15);
+    border: 1px solid rgba(27,154,170,0.35);
+    color: var(--teal-light);
+    padding: 6px 16px;
+    border-radius: 100px;
+    font-size: 12.5px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    margin-bottom: 24px;
+  }
+  .hero-badge::before { content: '●'; font-size: 8px; animation: blink 1.4s infinite; }
+  @keyframes blink { 0%,100%{opacity:1}50%{opacity:0.3} }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 4.5vw, 58px);
+    color: var(--white);
+    line-height: 1.15;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+  .hero-title em {
+    font-style: normal;
+    color: var(--gold);
+  }
+  .hero-sub {
+    color: rgba(255,255,255,0.65);
+    font-size: 16px;
+    font-weight: 300;
+    margin-bottom: 36px;
+    line-height: 1.8;
+  }
+  .hero-btns {
+    display: flex; gap: 14px; flex-wrap: wrap;
+  }
+  .btn-primary {
+    background: var(--teal);
+    color: var(--white);
+    padding: 14px 30px;
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14.5px;
+    transition: all 0.22s;
+    border: none; cursor: pointer;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--teal-light); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(27,154,170,0.35); }
+  .btn-outline {
+    background: transparent;
+    color: var(--white);
+    padding: 14px 30px;
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 14.5px;
+    border: 1.5px solid rgba(255,255,255,0.3);
+    transition: all 0.22s;
+    cursor: pointer;
+    display: inline-block;
+  }
+  .btn-outline:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.6); }
+  .hero-stats {
+    display: grid; grid-template-columns: repeat(3,1fr); gap: 16px;
+    margin-top: 44px;
+  }
+  .stat-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 20px 16px;
+    border-radius: var(--radius);
+    text-align: center;
+  }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 30px; font-weight: 700;
+    color: var(--gold);
+  }
+  .stat-label {
+    font-size: 11.5px;
+    color: rgba(255,255,255,0.55);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-top: 4px;
+  }
+  .hero-image-area {
+    display: flex; flex-direction: column; gap: 16px;
+  }
+  .hero-card {
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: var(--radius);
+    padding: 22px;
+    transition: transform 0.3s;
+  }
+  .hero-card:hover { transform: translateY(-4px); }
+  .hero-card-icon { font-size: 28px; margin-bottom: 10px; }
+  .hero-card h4 {
+    color: var(--white);
+    font-weight: 600;
+    font-size: 15px;
+    margin-bottom: 4px;
+  }
+  .hero-card p {
+    color: rgba(255,255,255,0.5);
+    font-size: 12.5px;
+    line-height: 1.6;
+  }
+  .hero-cards-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  }
+
+  /* ── SECTION COMMON ── */
+  section { padding: 80px 40px; }
+  .container { max-width: 1100px; margin: 0 auto; }
+  .section-label {
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 11.5px;
+    color: var(--teal);
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(26px, 3vw, 40px);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--navy);
+    margin-bottom: 16px;
+  }
+  .section-sub {
+    color: var(--gray-500);
+    font-size: 15.5px;
+    max-width: 540px;
+    line-height: 1.7;
+  }
+  .section-header { margin-bottom: 52px; }
+
+  /* ── PROFIL ── */
+  #profil { background: var(--white); }
+  .profil-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 70px; align-items: center;
+  }
+  .profil-text h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px; font-weight: 600;
+    color: var(--navy); margin-bottom: 14px;
+  }
+  .profil-text p {
+    color: var(--gray-500); font-size: 15px; line-height: 1.8; margin-bottom: 20px;
+  }
+  .profil-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .profil-list li {
+    display: flex; align-items: flex-start; gap: 12px;
+    font-size: 14.5px; color: var(--navy);
+  }
+  .profil-list .check {
+    width: 22px; height: 22px;
+    background: rgba(27,154,170,0.12);
+    color: var(--teal);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; flex-shrink: 0; margin-top: 1px;
+    font-weight: 700;
+  }
+  .profil-visual {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  }
+  .info-card {
+    background: var(--cream);
+    border-radius: var(--radius);
+    padding: 24px;
+    border: 1px solid var(--gray-200);
+    transition: all 0.22s;
+  }
+  .info-card:hover { border-color: var(--teal); transform: translateY(-3px); box-shadow: var(--shadow); }
+  .info-card.full { grid-column: 1 / -1; }
+  .info-card .icon { font-size: 26px; margin-bottom: 12px; }
+  .info-card h4 { font-weight: 600; font-size: 14px; color: var(--navy); margin-bottom: 6px; }
+  .info-card p { font-size: 13px; color: var(--gray-500); line-height: 1.6; }
+
+  /* ── LAYANAN ── */
+  #layanan { background: var(--cream); }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 20px;
+  }
+  .service-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 28px 22px;
+    border: 1px solid var(--gray-200);
+    transition: all 0.25s;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  .service-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0;
+    width: 100%; height: 4px;
+    background: linear-gradient(90deg, var(--teal), var(--teal-light));
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.3s;
+  }
+  .service-card:hover::before { transform: scaleX(1); }
+  .service-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); border-color: transparent; }
+  .service-icon {
+    width: 52px; height: 52px;
+    background: rgba(27,154,170,0.1);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px;
+    margin-bottom: 16px;
+  }
+  .service-card h3 { font-weight: 600; font-size: 15px; margin-bottom: 8px; color: var(--navy); }
+  .service-card p { font-size: 12.5px; color: var(--gray-500); line-height: 1.7; }
+
+  /* ── DOKTER ── */
+  #dokter { background: var(--white); }
+  .doctors-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 22px; }
+  .doctor-card {
+    background: var(--cream);
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid var(--gray-200);
+    transition: all 0.25s;
+  }
+  .doctor-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
+  .doctor-avatar {
+    height: 140px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 56px;
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+  }
+  .doctor-info { padding: 18px; }
+  .doctor-info h4 { font-weight: 700; font-size: 14.5px; color: var(--navy); margin-bottom: 4px; }
+  .doctor-info .spec {
+    font-size: 12px; color: var(--teal); font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 8px;
+  }
+  .doctor-info .jadwal {
+    font-size: 12px; color: var(--gray-500);
+    display: flex; align-items: center; gap: 5px;
+  }
+  .badge-avail {
+    display: inline-block;
+    background: rgba(39,174,96,0.12);
+    color: var(--green);
+    padding: 3px 10px; border-radius: 100px;
+    font-size: 11px; font-weight: 600;
+    margin-top: 10px;
+  }
+
+  /* ── FORM PASIEN ── */
+  #pendaftaran { background: var(--cream); }
+  .form-container {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 48px;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--gray-200);
+    max-width: 800px; margin: 0 auto;
+  }
+  .form-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px; font-weight: 700;
+    color: var(--navy); margin-bottom: 6px;
+  }
+  .form-sub { color: var(--gray-500); font-size: 14px; margin-bottom: 32px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 20px; }
+  .form-group label {
+    font-size: 13px; font-weight: 600; color: var(--navy);
+    letter-spacing: 0.2px;
+  }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 12px 16px;
+    border: 1.5px solid var(--gray-200);
+    border-radius: var(--radius-sm);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--navy);
+    background: var(--gray-100);
+    transition: all 0.2s;
+    outline: none;
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: var(--teal);
+    background: var(--white);
+    box-shadow: 0 0 0 3px rgba(27,154,170,0.12);
+  }
+  .form-group textarea { resize: vertical; min-height: 90px; }
+  .form-section-title {
+    font-size: 13px; text-transform: uppercase; letter-spacing: 1.5px;
+    color: var(--teal); font-weight: 600;
+    margin-bottom: 18px; margin-top: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--gray-200);
+  }
+  .form-submit {
+    width: 100%;
+    background: linear-gradient(135deg, var(--navy), var(--navy-mid));
+    color: var(--white);
+    padding: 16px;
+    border-radius: var(--radius-sm);
+    font-size: 15px; font-weight: 600;
+    border: none; cursor: pointer;
+    transition: all 0.25s;
+    margin-top: 10px;
+    letter-spacing: 0.3px;
+  }
+  .form-submit:hover { background: linear-gradient(135deg, var(--teal), var(--teal-light)); transform: translateY(-2px); box-shadow: var(--shadow); }
+  .form-notice {
+    display: flex; align-items: center; gap: 8px;
+    background: rgba(27,154,170,0.08);
+    border: 1px solid rgba(27,154,170,0.2);
+    padding: 12px 16px; border-radius: var(--radius-sm);
+    font-size: 12.5px; color: var(--teal);
+    margin-bottom: 28px;
+  }
+
+  /* SUCCESS MODAL */
+  .modal-overlay {
+    display: none;
+    position: fixed; inset: 0; z-index: 2000;
+    background: rgba(11,28,61,0.6);
+    backdrop-filter: blur(6px);
+    align-items: center; justify-content: center;
+  }
+  .modal-overlay.show { display: flex; animation: fadeIn 0.3s; }
+  @keyframes fadeIn { from{opacity:0}to{opacity:1} }
+  .modal {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 48px 40px;
+    text-align: center;
+    max-width: 440px; width: 90%;
+    animation: slideUp 0.35s;
+  }
+  @keyframes slideUp { from{transform:translateY(30px);opacity:0}to{transform:translateY(0);opacity:1} }
+  .modal .success-icon {
+    width: 72px; height: 72px;
+    background: rgba(39,174,96,0.12);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 32px;
+    margin: 0 auto 20px;
+  }
+  .modal h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px; font-weight: 700; color: var(--navy);
+    margin-bottom: 10px;
+  }
+  .modal p { color: var(--gray-500); font-size: 14.5px; line-height: 1.7; margin-bottom: 6px; }
+  .modal .nomor-antrian {
+    font-family: 'Playfair Display', serif;
+    font-size: 40px; font-weight: 700; color: var(--teal);
+    margin: 16px 0;
+  }
+  .modal-close {
+    margin-top: 22px;
+    background: var(--navy);
+    color: var(--white);
+    padding: 12px 32px;
+    border-radius: var(--radius-sm);
+    border: none; cursor: pointer;
+    font-size: 14px; font-weight: 600;
+    font-family: 'DM Sans', sans-serif;
+    transition: all 0.2s;
+  }
+  .modal-close:hover { background: var(--teal); }
+
+  /* ── KONTAK ── */
+  #kontak { background: var(--navy); }
+  .kontak-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 70px; align-items: start; }
+  #kontak .section-title { color: var(--white); }
+  #kontak .section-label { color: var(--teal-light); }
+  #kontak .section-sub { color: rgba(255,255,255,0.55); }
+  .kontak-items { display: flex; flex-direction: column; gap: 20px; margin-top: 36px; }
+  .kontak-item {
+    display: flex; gap: 16px; align-items: flex-start;
+  }
+  .kontak-item .k-icon {
+    width: 44px; height: 44px;
+    background: rgba(27,154,170,0.15);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+    border: 1px solid rgba(27,154,170,0.25);
+  }
+  .kontak-item h5 { color: var(--gold); font-size: 11.5px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+  .kontak-item p { color: rgba(255,255,255,0.7); font-size: 14px; line-height: 1.6; }
+  .map-placeholder {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: var(--radius);
+    height: 280px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    color: rgba(255,255,255,0.3);
+    gap: 12px;
+  }
+  .map-placeholder .map-icon { font-size: 42px; }
+  .map-placeholder p { font-size: 13.5px; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #060f1f;
+    padding: 28px 40px;
+    text-align: center;
+    color: rgba(255,255,255,0.35);
+    font-size: 13px;
+    border-top: 1px solid rgba(255,255,255,0.07);
+  }
+  footer span { color: var(--teal); }
+
+  /* ACTIVE NAV */
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  /* ── MOBILE ── */
+  @media (max-width: 768px) {
+    nav { padding: 0 20px; }
+    .nav-links { display: none; }
+    #hero { padding: 100px 20px 50px; }
+    .hero-content { grid-template-columns: 1fr; gap: 40px; }
+    .hero-cards-grid { grid-template-columns: 1fr 1fr; }
+    .hero-stats { grid-template-columns: repeat(3,1fr); }
+    section { padding: 60px 20px; }
+    .profil-grid, .kontak-grid { grid-template-columns: 1fr; gap: 40px; }
+    .services-grid { grid-template-columns: 1fr 1fr; }
+    .doctors-grid { grid-template-columns: 1fr 1fr; }
+    .form-container { padding: 28px 20px; }
+    .form-row { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 480px) {
+    .services-grid { grid-template-columns: 1fr; }
+    .doctors-grid { grid-template-columns: 1fr; }
+    .hero-stats { grid-template-columns: 1fr 1fr; }
+    .profil-visual { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">
+    <div class="logo-icon">🏥</div>
+    <div>
+      <span>RS Medika Prima</span>
+      <small>Rumah Sakit Umum</small>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#hero">Beranda</a></li>
+    <li><a href="#profil">Profil</a></li>
+    <li><a href="#layanan">Layanan</a></li>
+    <li><a href="#dokter">Dokter</a></li>
+    <li><a href="#kontak">Kontak</a></li>
+    <li><a href="#pendaftaran" class="nav-cta">Daftar Sekarang</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-content">
+    <div>
+      <div class="hero-badge">Buka 24 Jam — Siap Melayani Anda</div>
+      <h1 class="hero-title">
+        Kesehatan Anda,<br><em>Prioritas Kami</em>
+      </h1>
+      <p class="hero-sub">
+        RS Medika Prima hadir dengan fasilitas modern, dokter spesialis berpengalaman, dan layanan terpadu untuk menjaga kesehatan seluruh keluarga Anda.
+      </p>
+      <div class="hero-btns">
+        <a href="#pendaftaran" class="btn-primary">Daftar Pasien →</a>
+        <a href="#layanan" class="btn-outline">Lihat Layanan</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-card">
+          <div class="stat-num">120+</div>
+          <div class="stat-label">Dokter Spesialis</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">50K+</div>
+          <div class="stat-label">Pasien / Tahun</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">25</div>
+          <div class="stat-label">Tahun Berdiri</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-image-area">
+      <div class="hero-cards-grid">
+        <div class="hero-card">
+          <div class="hero-card-icon">🚑</div>
+          <h4>IGD 24 Jam</h4>
+          <p>Penanganan darurat cepat dan profesional</p>
+        </div>
+        <div class="hero-card">
+          <div class="hero-card-icon">🔬</div>
+          <h4>Lab Modern</h4>
+          <p>Hasil laboratorium akurat & cepat</p>
+        </div>
+        <div class="hero-card">
+          <div class="hero-card-icon">🩺</div>
+          <h4>Poli Lengkap</h4>
+          <p>20+ poliklinik spesialis tersedia</p>
+        </div>
+        <div class="hero-card">
+          <div class="hero-card-icon">💊</div>
+          <h4>Apotek RS</h4>
+          <p>Obat tersedia 24 jam sehari</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROFIL -->
+<section id="profil">
+  <div class="container">
+    <div class="profil-grid">
+      <div class="profil-text">
+        <div class="section-label">Tentang Kami</div>
+        <h2 class="section-title">RS Medika Prima</h2>
+        <h3>Melayani dengan Hati Sejak 1999</h3>
+        <p>
+          Rumah Sakit Medika Prima adalah rumah sakit swasta terkemuka yang berlokasi di pusat kota. Berdiri sejak tahun 1999, kami telah melayani lebih dari 50.000 pasien setiap tahunnya dengan standar pelayanan internasional.
+        </p>
+        <p>
+          Kami berkomitmen untuk memberikan pelayanan kesehatan yang komprehensif, terjangkau, dan berkualitas tinggi untuk seluruh lapisan masyarakat.
+        </p>
+        <ul class="profil-list">
+          <li><span class="check">✓</span>Terakreditasi Paripurna oleh KARS</li>
+          <li><span class="check">✓</span>Fasilitas berstandar internasional (ISO 9001:2015)</li>
+          <li><span class="check">✓</span>Menerima BPJS Kesehatan & Asuransi Swasta</li>
+          <li><span class="check">✓</span>Tim dokter spesialis bersertifikat nasional & internasional</li>
+          <li><span class="check">✓</span>Sistem rekam medis elektronik terintegrasi</li>
+        </ul>
+      </div>
+      <div class="profil-visual">
+        <div class="info-card">
+          <div class="icon">🏛️</div>
+          <h4>Visi</h4>
+          <p>Menjadi rumah sakit pilihan utama yang memberikan layanan kesehatan terbaik berstandar internasional.</p>
+        </div>
+        <div class="info-card">
+          <div class="icon">💡</div>
+          <h4>Misi</h4>
+          <p>Menghadirkan pelayanan medis profesional, inovatif, dan berpusat pada keselamatan pasien.</p>
+        </div>
+        <div class="info-card full">
+          <div class="icon">⭐</div>
+          <h4>Nilai Utama</h4>
+          <p>Integritas · Inovasi · Empati · Keselamatan · Keunggulan dalam setiap aspek pelayanan kesehatan.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LAYANAN -->
+<section id="layanan">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Layanan Kami</div>
+      <h2 class="section-title">Pelayanan Kesehatan Lengkap</h2>
+      <p class="section-sub">Kami menyediakan berbagai layanan medis berkualitas untuk memenuhi kebutuhan kesehatan Anda dan keluarga.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">🩺</div>
+        <h3>Rawat Jalan</h3>
+        <p>Konsultasi dokter spesialis di 20+ poliklinik dengan jadwal teratur setiap hari.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🛏️</div>
+        <h3>Rawat Inap</h3>
+        <p>Kamar perawatan dari kelas III hingga VIP dengan fasilitas modern dan nyaman.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🚑</div>
+        <h3>IGD 24 Jam</h3>
+        <p>Instalasi Gawat Darurat siaga 24 jam dengan tim medis terlatih dan peralatan lengkap.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🔬</div>
+        <h3>Laboratorium</h3>
+        <p>Pemeriksaan laboratorium lengkap dengan hasil cepat dan akurat bersertifikat.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🩻</div>
+        <h3>Radiologi</h3>
+        <p>X-Ray, USG, CT-Scan, dan MRI dengan teknologi terkini untuk diagnosis akurat.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">⚕️</div>
+        <h3>Bedah</h3>
+        <p>Kamar operasi modern dengan standar sterilisasi tinggi dan tim bedah berpengalaman.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">👶</div>
+        <h3>Persalinan</h3>
+        <p>Kamar bersalin ramah ibu dan bayi dengan bidan dan dokter obgyn siap mendampingi.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">💊</div>
+        <h3>Farmasi</h3>
+        <p>Apotek rumah sakit buka 24 jam dengan obat lengkap dan pelayanan konseling farmasi.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DOKTER -->
+<section id="dokter">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Tim Medis</div>
+      <h2 class="section-title">Dokter Spesialis Kami</h2>
+      <p class="section-sub">Ditangani oleh dokter spesialis berpengalaman dan berdedikasi tinggi untuk kesembuhan Anda.</p>
+    </div>
+    <div class="doctors-grid">
+      <div class="doctor-card">
+        <div class="doctor-avatar">👨‍⚕️</div>
+        <div class="doctor-info">
+          <h4>dr. Ahmad Fauzi, Sp.PD</h4>
+          <div class="spec">Penyakit Dalam</div>
+          <div class="jadwal">🕘 Senin – Jumat, 08.00–14.00</div>
+          <span class="badge-avail">Tersedia</span>
+        </div>
+      </div>
+      <div class="doctor-card">
+        <div class="doctor-avatar">👩‍⚕️</div>
+        <div class="doctor-info">
+          <h4>dr. Sari Dewi, Sp.OG</h4>
+          <div class="spec">Obstetri & Ginekologi</div>
+          <div class="jadwal">🕘 Senin – Sabtu, 09.00–15.00</div>
+          <span class="badge-avail">Tersedia</span>
+        </div>
+      </div>
+      <div class="doctor-card">
+        <div class="doctor-avatar">👨‍⚕️</div>
+        <div class="doctor-info">
+          <h4>dr. Budi Santoso, Sp.JP</h4>
+          <div class="spec">Jantung & Pembuluh Darah</div>
+          <div class="jadwal">🕘 Selasa – Kamis, 10.00–16.00</div>
+          <span class="badge-avail">Tersedia</span>
+        </div>
+      </div>
+      <div class="doctor-card">
+        <div class="doctor-avatar">👩‍⚕️</div>
+        <div class="doctor-info">
+          <h4>dr. Rina Kusuma, Sp.A</h4>
+          <div class="spec">Anak & Pediatri</div>
+          <div class="jadwal">🕘 Setiap Hari, 08.00–13.00</div>
+          <span class="badge-avail">Tersedia</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PENDAFTARAN PASIEN -->
+<section id="pendaftaran">
+  <div class="container">
+    <div class="section-header" style="text-align:center;">
+      <div class="section-label">Pendaftaran Online</div>
+      <h2 class="section-title">Daftar Sebagai Pasien</h2>
+      <p class="section-sub" style="margin:0 auto;">Isi formulir di bawah ini untuk mendaftarkan diri atau anggota keluarga Anda. Pendaftaran mudah, cepat, dan terpercaya.</p>
+    </div>
+    <div class="form-container">
+      <div class="form-notice">
+        ℹ️ Data Anda terlindungi dan hanya digunakan untuk keperluan administrasi medis.
+      </div>
+
+      <div class="form-section-title">Data Pribadi Pasien</div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Nama Lengkap *</label>
+          <input type="text" id="nama" placeholder="Masukkan nama lengkap" required>
+        </div>
+        <div class="form-group">
+          <label>NIK (KTP) *</label>
+          <input type="text" id="nik" placeholder="16 digit NIK" maxlength="16">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Tanggal Lahir *</label>
+          <input type="date" id="tgl_lahir">
+        </div>
+        <div class="form-group">
+          <label>Jenis Kelamin *</label>
+          <select id="jenis_kelamin">
+            <option value="">-- Pilih --</option>
+            <option>Laki-laki</option>
+            <option>Perempuan</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Nomor Telepon *</label>
+          <input type="tel" id="telp" placeholder="08xxxxxxxxxx">
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="email" placeholder="email@contoh.com">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Alamat Lengkap</label>
+        <textarea id="alamat" placeholder="Jalan, RT/RW, Kelurahan, Kecamatan, Kota"></textarea>
+      </div>
+
+      <div class="form-section-title">Informasi Kunjungan</div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Poliklinik / Spesialis *</label>
+          <select id="poli">
+            <option value="">-- Pilih Poli --</option>
+            <option>Penyakit Dalam</option>
+            <option>Obstetri & Ginekologi</option>
+            <option>Jantung & Pembuluh Darah</option>
+            <option>Anak & Pediatri</option>
+            <option>Bedah Umum</option>
+            <option>Saraf (Neurologi)</option>
+            <option>Mata (Oftalmologi)</option>
+            <option>THT</option>
+            <option>Kulit & Kelamin</option>
+            <option>Ortopedi</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Tanggal Kunjungan *</label>
+          <input type="date" id="tgl_kunjungan">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Jenis Pasien *</label>
+          <select id="jenis_pasien">
+            <option value="">-- Pilih --</option>
+            <option>Pasien Baru</option>
+            <option>Pasien Lama</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Jaminan Kesehatan</label>
+          <select id="jaminan">
+            <option value="">-- Pilih --</option>
+            <option>Umum / Bayar Mandiri</option>
+            <option>BPJS Kesehatan</option>
+            <option>Asuransi Swasta</option>
+            <option>Jasa Raharja</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Keluhan / Gejala</label>
+        <textarea id="keluhan" placeholder="Ceritakan keluhan atau gejala yang Anda rasakan..."></textarea>
+      </div>
+
+      <button class="form-submit" onclick="submitForm()">
+        ✓ Daftarkan Pasien Sekarang
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- KONTAK -->
+<section id="kontak">
+  <div class="container">
+    <div class="kontak-grid">
+      <div>
+        <div class="section-label">Hubungi Kami</div>
+        <h2 class="section-title">Kami Siap Membantu Anda</h2>
+        <p class="section-sub">Jangan ragu untuk menghubungi kami kapanpun Anda membutuhkan informasi atau layanan kesehatan.</p>
+        <div class="kontak-items">
+          <div class="kontak-item">
+            <div class="k-icon">📍</div>
+            <div>
+              <h5>Alamat</h5>
+              <p>Jl. Kesehatan No. 99, Menteng<br>Jakarta Pusat 10310</p>
+            </div>
+          </div>
+          <div class="kontak-item">
+            <div class="k-icon">📞</div>
+            <div>
+              <h5>Telepon</h5>
+              <p>(021) 1500-999 (IGD & Info)<br>(021) 1500-888 (Pendaftaran)</p>
+            </div>
+          </div>
+          <div class="kontak-item">
+            <div class="k-icon">📧</div>
+            <div>
+              <h5>Email</h5>
+              <p>info@rsmedikaprima.co.id<br>humas@rsmedikaprima.co.id</p>
+            </div>
+          </div>
+          <div class="kontak-item">
+            <div class="k-icon">🕐</div>
+            <div>
+              <h5>Jam Operasional</h5>
+              <p>Poli: Senin – Sabtu, 07.00 – 20.00<br>IGD & Apotek: 24 Jam, 7 Hari</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="map-placeholder">
+          <div class="map-icon">🗺️</div>
+          <p>Jl. Kesehatan No. 99, Jakarta Pusat</p>
+          <p style="font-size:12px;margin-top:4px;">Klik untuk buka di Google Maps</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 <span>RS Medika Prima</span> — Layanan Kesehatan Terpadu. Semua hak dilindungi.</p>
+</footer>
+
+<!-- SUCCESS MODAL -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal">
+    <div class="success-icon">✅</div>
+    <h3>Pendaftaran Berhasil!</h3>
+    <p>Nomor Antrian Anda:</p>
+    <div class="nomor-antrian" id="nomorAntrian">A-042</div>
+    <p id="modalInfo" style="font-size:13.5px;"></p>
+    <p style="font-size:12px;color:#aaa;margin-top:12px;">Harap tiba 15 menit sebelum jadwal kunjungan Anda.</p>
+    <button class="modal-close" onclick="closeModal()">Tutup</button>
+  </div>
+</div>
+
+<script>
+  // Set min date for visit
+  document.addEventListener('DOMContentLoaded', () => {
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('tgl_kunjungan').min = today;
+    document.getElementById('tgl_kunjungan').value = today;
+  });
+
+  let antrian = 41;
+
+  function submitForm() {
+    const nama = document.getElementById('nama').value.trim();
+    const nik = document.getElementById('nik').value.trim();
+    const tgl = document.getElementById('tgl_lahir').value;
+    const jk = document.getElementById('jenis_kelamin').value;
+    const telp = document.getElementById('telp').value.trim();
+    const poli = document.getElementById('poli').value;
+    const tglK = document.getElementById('tgl_kunjungan').value;
+
+    if (!nama) { alert('Nama lengkap wajib diisi.'); return; }
+    if (!tgl) { alert('Tanggal lahir wajib diisi.'); return; }
+    if (!jk) { alert('Jenis kelamin wajib diisi.'); return; }
+    if (!telp) { alert('Nomor telepon wajib diisi.'); return; }
+    if (!poli) { alert('Pilih poliklinik yang dituju.'); return; }
+    if (!tglK) { alert('Tanggal kunjungan wajib diisi.'); return; }
+
+    antrian++;
+    const nomorAntrian = 'A-' + String(antrian).padStart('3','0');
+    document.getElementById('nomorAntrian').textContent = nomorAntrian;
+
+    const tglFormatted = new Date(tglK).toLocaleDateString('id-ID', {weekday:'long', year:'numeric', month:'long', day:'numeric'});
+    document.getElementById('modalInfo').innerHTML =
+      `<strong>${nama}</strong><br>Poli ${poli}<br>${tglFormatted}`;
+
+    document.getElementById('modalOverlay').classList.add('show');
+  }
+
+  function closeModal() {
+    document.getElementById('modalOverlay').classList.remove('show');
+    // Reset form
+    ['nama','nik','tgl_lahir','jenis_kelamin','telp','email','alamat','poli','jenis_pasien','jaminan','keluhan'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.value = '';
+    });
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('tgl_kunjungan').value = today;
+  }
+
+  // Close modal on overlay click
+  document.getElementById('modalOverlay').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+
+  // Smooth nav highlight
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 100) current = s.getAttribute('id');
+    });
+    navLinks.forEach(a => {
+      a.classList.remove('active');
+      if (a.getAttribute('href') === '#' + current) a.classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>
